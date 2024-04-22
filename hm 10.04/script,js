@@ -1,0 +1,25 @@
+//В рамках БД 190923_MUSIC напишите следующие запросы:
+//2.Вывести общее ко-во реакций, используя метод aggregate()
+
+//3.Вывести данные о реакциях, включая название трека и имя автора
+
+db.reactions.aggregate([
+
+    {
+        $lookup: {
+            from: 'tracks',
+            localField: 'track_id',
+            foreignField: '_id',
+            as: 'track'
+        }
+    },
+    {
+        $lookup: {
+            from: 'users',
+            localField: 'author_id',
+            foreignField: '_id',
+            as: 'author'
+        }
+    }
+
+])
